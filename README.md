@@ -1,5 +1,7 @@
 # Oracle Trading Demo (Flask + PL/SQL)
 
+### Trades page
+![Trades page](images/trade_page.png "Trades table")
 ---
 
 ## 🎯 Objectives
@@ -11,6 +13,9 @@
 - **Usable UI**: A simple Flask front end to capture trades and visualize positions.
 
 ---
+### Audit Log
+![Audit Log](images/Audit_log.png "Audit Log")
+---
 
 ## 🧩 What this demonstrates (at a glance)
 
@@ -19,6 +24,12 @@
 - **Controls**: audit log for every mutation.
 - **System analysis**: separation of UI vs. database logic, minimal & readable code.
 
+---
+### Positions Summary
+![Positions Summary](images/positions_summary.png "Positions Summary")
+---
+### Position Page
+![Position Page](images/position_page.png "Position Page")
 ---
 
 ## 🚀 Quick Start (local)

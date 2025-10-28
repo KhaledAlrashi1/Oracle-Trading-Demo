@@ -1,7 +1,5 @@
 # Oracle Trading Demo (Flask + PL/SQL)
 
-A small but complete **Oracle-backed trading demo**
-
 ---
 
 ## 🎯 Objectives

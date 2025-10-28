@@ -1,6 +1,6 @@
 # Oracle Trading Demo (Flask + PL/SQL)
 
-A small, focused project that demonstrates **System Analyst** skills relevant to enterprise Oracle environments (e.g., Kuwait Investment Authority).
+A small but complete **Oracle-backed trading demo**
 
 ---
 

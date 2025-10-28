@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Positions Summary</h1>
+<div class="toolbar">
+  <a class="btn ghost" href="/trades">📜 Trades</a>
+  <a class="btn ghost" href="/position">🎯 Position</a>
+  <a class="btn ghost" href="/audit">🧾 Audit log</a>
+  <a class="btn ghost" href="/catalog">🗂 Catalog</a>
+</div>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr><th>Portfolio</th><th>Symbol</th><th>Qty</th><th>Avg Cost</th><th>Total Cost</th></tr>
+    </thead>
+    <tbody>
+    {% for r in rows %}
+      <tr>
+        <td>{{ r[0] }}</td>
+        <td>{{ r[1] }}</td>
+        <td>{{ '%.4f'|format(r[2]) }}</td>
+        <td>{{ '%.6f'|format(r[3]) }}</td>
+        <td>{{ '%.4f'|format(r[4]) }}</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="5" class="empty">No positions yet.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

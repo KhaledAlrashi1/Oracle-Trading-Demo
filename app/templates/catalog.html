@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Catalog</h1>
+<div class="toolbar">
+  <a class="btn ghost" href="/trades">📜 Trades</a>
+  <a class="btn ghost" href="/add-trade">➕ Add trade</a>
+</div>
+
+<div class="grid">
+  <!-- Portfolios -->
+  <div class="card">
+    <h2 style="margin-top:0">Portfolios</h2>
+    <form method="post" class="grid" style="grid-template-columns:1fr 160px">
+      <input type="hidden" name="kind" value="portfolio">
+      <div>
+        <label>Name</label>
+        <input name="name" placeholder="e.g., Atlas Core" required>
+      </div>
+      <div>
+        <label>Base currency</label>
+        <input name="base_currency" value="KWD">
+      </div>
+      <div style="grid-column:1/-1"><button class="btn" type="submit">Add portfolio</button></div>
+    </form>
+    <hr class="sep">
+    <table>
+      <thead><tr><th>ID</th><th>Name</th><th>Base</th><th>Actions</th></tr></thead>
+      <tbody>
+      {% for p in portfolios %}
+        <tr>
+          <td>{{ p[0] }}</td><td>{{ p[1] }}</td><td>{{ p[2] }}</td>
+          <td>
+            <form method="post" action="/catalog/delete/portfolio/{{ p[0] }}" onsubmit="return confirm('Delete portfolio {{p[1]}}?');">
+              <button class="btn danger" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="4" class="empty">No portfolios.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Securities -->
+  <div class="card">
+    <h2 style="margin-top:0">Securities</h2>
+    <form method="post" class="grid" style="grid-template-columns:1fr 140px 120px">
+      <input type="hidden" name="kind" value="security">
+      <div>
+        <label>Symbol</label>
+        <input name="symbol" placeholder="e.g., ATLS" required>
+      </div>
+      <div>
+        <label>Type</label>
+        <input name="sec_type" value="EQUITY">
+      </div>
+      <div>
+        <label>Currency</label>
+        <input name="currency" value="KWD">
+      </div>
+      <div style="grid-column:1/-1"><button class="btn" type="submit">Add security</button></div>
+    </form>
+    <hr class="sep">
+    <table>
+      <thead><tr><th>ID</th><th>Symbol</th><th>Type</th><th>Curr</th><th>Actions</th></tr></thead>
+      <tbody>
+      {% for s in securities %}
+        <tr>
+          <td>{{ s[0] }}</td><td>{{ s[1] }}</td><td>{{ s[2] }}</td><td>{{ s[3] }}</td>
+          <td>
+            <form method="post" action="/catalog/delete/security/{{ s[0] }}" onsubmit="return confirm('Delete security {{s[1]}}?');">
+              <button class="btn danger" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="5" class="empty">No securities.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Counterparties -->
+  <div class="card" style="grid-column:1/-1">
+    <h2 style="margin-top:0">Counterparties</h2>
+    <form method="post" class="grid" style="grid-template-columns:1fr 200px">
+      <input type="hidden" name="kind" value="counterparty">
+      <div>
+        <label>Name</label>
+        <input name="name" placeholder="e.g., Atlas Broker" required>
+      </div>
+      <div style="align-self:end">
+        <button class="btn" type="submit">Add counterparty</button>
+      </div>
+    </form>
+    <hr class="sep">
+    <table>
+      <thead><tr><th>ID</th><th>Name</th><th>Actions</th></tr></thead>
+      <tbody>
+      {% for c in counterparties %}
+        <tr>
+          <td>{{ c[0] }}</td><td>{{ c[1] }}</td>
+          <td>
+            <form method="post" action="/catalog/delete/counterparty/{{ c[0] }}" onsubmit="return confirm('Delete counterparty {{c[1]}}?');">
+              <button class="btn danger" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="3" class="empty">No counterparties.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

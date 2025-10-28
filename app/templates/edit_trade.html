@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Edit Trade</h1>
+<div class="toolbar">
+  <a class="btn ghost" href="/trades">⬅ Back to trades</a>
+</div>
+
+<div class="card">
+  <p><strong>Trade #{{ t[0] }}</strong> • Status: <span class="badge">{{ t[6] }}</span> • Placed: {{ t[7] }}</p>
+  <p class="hint">Only quantity and price can be changed. This will call <code>pkg_trading.replace_trade</code> and create a new trade entry.</p>
+  {% if t[6] != 'NEW' %}
+    <p class="hint">This trade is not NEW, so editing is disabled.</p>
+  {% endif %}
+
+  <form method="post" class="grid">
+    <div>
+      <label>Quantity</label>
+      <input name="qty" type="number" step="0.0001" value="{{ '%.4f'|format(t[4]) }}" required {% if t[6] != 'NEW' %}disabled{% endif %}>
+    </div>
+    <div>
+      <label>Price</label>
+      <input name="price" type="number" step="0.000001" value="{{ '%.6f'|format(t[5]) }}" required {% if t[6] != 'NEW' %}disabled{% endif %}>
+    </div>
+    <div style="align-self:end">
+      <button class="btn" type="submit" {% if t[6] != 'NEW' %}disabled{% endif %}>Save changes</button>
+    </div>
+  </form>
+  <hr class="sep">
+  <p class="hint">Portfolio ID: {{ t[1] }} • Security ID: {{ t[2] }} • Side: {{ t[3] }}</p>
+</div>
+{% endblock %}

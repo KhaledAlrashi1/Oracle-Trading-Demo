@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Position</h1>
+<div class="toolbar">
+  <a class="btn ghost" href="/trades">📜 Trades</a>
+  <a class="btn ghost" href="/positions-summary">📊 Positions summary</a>
+  <a class="btn ghost" href="/audit">🧾 Audit log</a>
+  <a class="btn ghost" href="/catalog">🗂 Catalog</a>
+</div>
+
+<div class="card">
+  <form method="get" class="grid">
+    <div>
+      <label>Portfolio</label>
+      <select name="portfolio_id">
+        {% for id, name in portfolios %}
+          <option value="{{ id }}" {% if id == pid %}selected{% endif %}>{{ id }} — {{ name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label>Security</label>
+      <select name="security_id">
+        {% for id, sym in securities %}
+          <option value="{{ id }}" {% if id == sid %}selected{% endif %}>{{ id }} — {{ sym }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div style="align-self:end">
+      <button class="btn" type="submit">Show</button>
+    </div>
+  </form>
+
+  {% if qty is not none %}
+  <hr class="sep">
+  <p><strong>Qty:</strong> {{ '%.4f'|format(qty) }} &nbsp; &nbsp; <strong>Avg cost:</strong> {{ '%.6f'|format(avg) }}</p>
+  {% endif %}
+</div>
+{% endblock %}

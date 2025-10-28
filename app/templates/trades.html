@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Trades</h1>
+<div class="toolbar">
+  <a class="btn" href="/add-trade">➕ Add trade</a>
+  <a class="btn ghost" href="/positions-summary">📊 Positions summary</a>
+  <a class="btn ghost" href="/audit">🧾 Audit log</a>
+  <a class="btn ghost" href="/catalog">🗂 Catalog</a>
+</div>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Portfolio</th><th>Security</th><th>Side</th><th>Qty</th><th>Price</th><th>Status</th><th>Date</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+    {% for t in rows %}
+      <tr>
+        <td>{{ t[0] }}</td>
+        <td>{{ t[1] }}</td>
+        <td>{{ t[2] }}</td>
+        <td><span class="badge">{{ 'Buy' if t[3]=='B' else 'Sell' }}</span></td>
+        <td>{{ '%.4f'|format(t[4]) }}</td>
+        <td>{{ '%.6f'|format(t[5]) }}</td>
+        <td>{{ t[6] }}</td>
+        <td>{{ t[7] }}</td>
+        <td class="row-actions">
+          {% if t[6] == 'NEW' %}
+          <a class="btn" href="/edit-trade/{{ t[0] }}">✏️ Edit</a>
+          <form style="display:inline" method="post" action="/cancel/{{ t[0] }}"><button class="btn danger" type="submit">Cancel</button></form>
+          {% else %}
+          <span class="empty">—</span>
+          {% endif %}
+        </td>
+      </tr>
+    {% else %}
+      <tr><td colspan="9" class="empty">No trades yet. Use <strong>Add trade</strong> to create your first order.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Audit Log</h1>
+<div class="toolbar">
+  <a class="btn ghost" href="/trades">📜 Trades</a>
+  <a class="btn ghost" href="/positions-summary">📊 Positions summary</a>
+  <a class="btn ghost" href="/catalog">🗂 Catalog</a>
+</div>
+<div class="card">
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Action</th><th>Ref ID</th><th>User</th><th>When</th></tr>
+    </thead>
+    <tbody>
+    {% for a in rows %}
+      <tr>
+        <td>{{ a[0] }}</td>
+        <td>{{ a[1] }}</td>
+        <td>{{ a[2] }}</td>
+        <td>{{ a[3] }}</td>
+        <td>{{ a[4] }}</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="5" class="empty">Nothing yet.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

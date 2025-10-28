@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Add Trade</h1>
+<div class="card">
+  <form method="post">
+    <div class="grid">
+      <div>
+        <label>Portfolio</label>
+        <select name="portfolio_id">
+          {% for id, name, base in portfolios %}
+            <option value="{{ id }}">{{ id }} — {{ name }} ({{ base }})</option>
+          {% endfor %} 
+        </select>
+      </div>
+      <div>
+        <label>Security</label>
+        <select name="security_id">
+          {% for id, sym in securities %}
+            <option value="{{ id }}">{{ id }} — {{ sym }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div>
+        <label>Side</label>
+        <select name="side">
+          <option value="B">Buy</option>
+          <option value="S">Sell</option>
+        </select>
+      </div>
+      <div>
+        <label>Quantity</label>
+        <input name="qty" type="number" step="0.0001" required>
+      </div>
+      <div>
+        <label>Price</label>
+        <input name="price" type="number" step="0.000001" required>
+      </div>
+      <div>
+        <label>Counterparty</label>
+        <select name="counterparty_id">
+          {% for id, name in cps %}
+            <option value="{{ id }}">{{ id }} — {{ name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <p class="hint">Server validates values; database package enforces business rules.</p>
+    <button class="btn" type="submit">Submit trade</button>
+    <a class="btn ghost" href="/trades">⬅ Back to trades</a>
+  </form>
+</div>
+{% endblock %}

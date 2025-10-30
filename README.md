@@ -1,4 +1,4 @@
-# Oracle Trading Demo (Flask + PL/SQL)
+# Oracle Trading System (Flask + PL/SQL)
 
 ### Trades page
 ![Trades page](images/trade_page.png "Trades table")
